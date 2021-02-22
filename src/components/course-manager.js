@@ -3,10 +3,16 @@ import {Route} from 'react-router-dom'
 import CourseTable from "./course-table";
 import CourseGrid from "./course-grid";
 import CourseEditor from "../course-editor";
+import courseService from "../services/course-service";
+import {act} from "@testing-library/react";
 
 export default class CourseManager extends React.Component {
   state = {
-    courses: [
+    courses: []
+  };
+
+  addAll = () => {
+    const initialCourses = [
       {title: "CS1234", owner: "Alice", lastModified: "1/2/21"},
       {title: "CS2345", owner: "Bob", lastModified: "2/2/22"},
       {title: "CS3456", owner: "Carlos", lastModified: "1/2/23"},
@@ -14,7 +20,32 @@ export default class CourseManager extends React.Component {
       {title: "CS5678", owner: "Ellie", lastModified: "1/2/25"},
       {title: "CS6789", owner: "Frankie", lastModified: "1/2/26"},
     ]
-  };
+
+    initialCourses.forEach(course => {
+      courseService.createCourse(course)
+        .then(course => this.setState(
+          (prevState) => (
+            {
+              ...prevState,
+              courses: [
+                ...prevState.courses,
+                course
+              ]
+            }
+          )));
+
+    });
+  }
+
+  componentDidMount = () => {
+    courseService.findAllCourses()
+      .then(actualCourses => this.setState(
+        {
+          courses: actualCourses
+        }
+      ))
+  }
+
 
   addCourse = () => {
 
@@ -22,19 +53,33 @@ export default class CourseManager extends React.Component {
       title: "CS7890",
       owner: "Gregor",
       lastModified: "1/2/27"
-    }
-    this.state.courses.push(newCourse);
-    this.setState(this.state);
+    };
+
+    courseService.createCourse(newCourse)
+      .then(course => this.setState(
+        (prevState) => (
+          {
+            ...prevState,
+            courses: [
+              ...prevState.courses,
+              course
+            ]
+          }
+        )));
   };
 
   deleteCourse = (courseToDelete) => {
-    const newCourses = this.state.courses
-      .filter(course => course !== courseToDelete);
-
-    this.setState({
-      courses: newCourses
-    });
+    courseService.deleteCourse(courseToDelete._id)
+      .then(status => {
+        this.setState((prevState) => (
+          {
+            ...prevState,
+            courses: prevState.courses
+              .filter(course => course !== courseToDelete)
+          }))
+      })
   }
+
 
   render() {
     return (
@@ -43,6 +88,10 @@ export default class CourseManager extends React.Component {
         <button className="btn btn-success"
                 onClick={this.addCourse}>
           Add Course
+        </button>
+        <button className="btn btn-primary"
+                onClick={this.addAll}>
+          Add multiple courses
         </button>
         <Route path="/courses/table">
           <CourseTable
