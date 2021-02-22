@@ -12,12 +12,16 @@ const CourseCard = ({title, owner, lastModified}) =>
         <h5 className="card-title">{title}</h5>
         <p className="card-text">Owner: {owner}</p>
         <p className="card-text">Last modified: {lastModified}</p>
+
         <Link to="/courses/editor"
               className="btn btn-primary">
           Edit
         </Link>
-        <i className="fas fa-check"></i>
-        <i className="fas fa-trash"></i>
+
+        <div className="float-right">
+          <i className="fas fa-fw fa-check"></i>
+          <i className="fas fa-fw fa-trash"></i>
+        </div>
       </div>
     </div>
   </div>

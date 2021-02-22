@@ -1,5 +1,6 @@
 import React from 'react'
 import {Route} from 'react-router-dom'
+import Navbar from "./course-navbar";
 import CourseTable from "./course-table";
 import CourseGrid from "./course-grid";
 import CourseEditor from "../course-editor";
@@ -19,7 +20,7 @@ export default class CourseManager extends React.Component {
       {title: "CS4567", owner: "Dan", lastModified: "1/2/24"},
       {title: "CS5678", owner: "Ellie", lastModified: "1/2/25"},
       {title: "CS6789", owner: "Frankie", lastModified: "1/2/26"},
-    ]
+    ];
 
     initialCourses.forEach(course => {
       courseService.createCourse(course)
@@ -44,17 +45,9 @@ export default class CourseManager extends React.Component {
           courses: actualCourses
         }
       ))
-  }
+  };
 
-
-  addCourse = () => {
-
-    const newCourse = {
-      title: "CS7890",
-      owner: "Gregor",
-      lastModified: "1/2/27"
-    };
-
+  addCourse = (newCourse) => {
     courseService.createCourse(newCourse)
       .then(course => this.setState(
         (prevState) => (
@@ -76,37 +69,48 @@ export default class CourseManager extends React.Component {
             ...prevState,
             courses: prevState.courses
               .filter(course => course !== courseToDelete)
-          }))
+          }
+        ))
       })
   }
 
+  updateCourse = (courseToUpdate) => {
+    courseService.updateCourse(courseToUpdate._id, courseToUpdate)
+      .then(status =>
+        this.setState((prevState) => (
+          {
+            ...prevState,
+            courses: prevState.courses.map(
+              course => course._id === courseToUpdate._id ? courseToUpdate : course)
+          }
+        )))
+  }
 
   render() {
     return (
-      <div className="container-fluid">
-        <h1>Course Manager</h1>
-        <button className="btn btn-success"
-                onClick={this.addCourse}>
-          Add Course
-        </button>
-        <button className="btn btn-primary"
-                onClick={this.addAll}>
-          Add multiple courses
-        </button>
-        <Route path="/courses/table">
-          <CourseTable
-            deleteCourse={this.deleteCourse}
-            courses={this.state.courses}/>
-        </Route>
-        <Route path="/courses/grid">
-          <CourseGrid
-            deleteCourse={this.deleteCourse}
-            courses={this.state.courses}/>
-        </Route>
-        <Route path="/courses/editor"
-               render={(props) =>
-                 <CourseEditor {...props}/>}>
-        </Route>
+      <div>
+        <Navbar
+          addCourse={this.addCourse}
+          addAll={this.addAll}/>
+
+        <div className="container-fluid">
+
+          <Route path="/courses/table">
+            <CourseTable
+              deleteCourse={this.deleteCourse}
+              updateCourse={this.updateCourse}
+              courses={this.state.courses}/>
+          </Route>
+          <Route path="/courses/grid">
+            <CourseGrid
+              deleteCourse={this.deleteCourse}
+              courses={this.state.courses}/>
+          </Route>
+          <Route path="/courses/editor"
+                 render={(props) =>
+                   <CourseEditor {...props}/>}>
+          </Route>
+        </div>
       </div>
     );
   }

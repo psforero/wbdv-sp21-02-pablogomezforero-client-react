@@ -1,4 +1,8 @@
-const COURSES_URL = "https://wbdv-generic-server.herokuapp.com/api/pforero731151/courses"
+const COURSES_URL = "https://wbdv-generic-server.herokuapp.com/api/pforero6197/courses"
+
+//pforero731151
+//pforero0510
+//pforero6197
 
 export const findAllCourses = () =>
   fetch(COURSES_URL)
@@ -20,13 +24,22 @@ export const deleteCourse = (courseId) =>
     {method: 'DELETE'})
     .then(response => response.json());
 
-export const updateCourse = (courseId, course) => {
-};
+export const updateCourse = (courseId, course) =>
+  fetch(`${COURSES_URL}/${courseId}`,
+    {
+      method: 'PUT',
+      body: JSON.stringify((course)),
+      headers: {
+        'content-type': 'application/json'
+      }
+    })
+    .then(response => response.json());
+
 
 
 export default {
   findAllCourses,
   deleteCourse,
   createCourse,
-  updateCourse
+  updateCourse,
 }

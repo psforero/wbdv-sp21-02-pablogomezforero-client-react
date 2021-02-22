@@ -12,17 +12,29 @@ export default class CourseTable extends React.Component {
   render() {
     return (
       <div>
-        <Link to="/courses/grid">
-          <i className="fas fa-2x fa-th float-right"></i>
-        </Link>
-        <h2>Course Table</h2>
-
         <table className="table">
+          <thead>
+          <tr>
+            <th>Class title</th>
+            <th>Owned by</th>
+            <th>Last modified</th>
+            <th>
+              <div className="float-right">
+                <i className="fas fa-lg fa-folder"></i>
+                <i className="fas fa-lg fa-sort-alpha-down"></i>
+                <Link to="/courses/grid">
+                  <i className="fas fa-lg fa-th"></i>
+                </Link>
+              </div>
+            </th>
+          </tr>
+          </thead>
           <tbody>
           {
             this.props.courses.map((course, index) =>
               <CourseRow
                 deleteCourse={this.props.deleteCourse}
+                updateCourse={this.props.updateCourse}
                 key={index}
                 course={course}
                 title={course.title}

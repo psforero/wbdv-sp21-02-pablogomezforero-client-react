@@ -4,10 +4,13 @@ import {Link} from "react-router-dom";
 
 const CourseGrid = ({courses}) =>
   <div>
-    <Link to="/courses/table">
-      <i className="fas fa-2x fa-list float-right"></i>
-    </Link>
-    <h2>Course grid</h2>
+    <div className="float-right">
+      <i className="fas fa-lg fa-folder"></i>
+      <i className="fas fa-lg fa-sort-alpha-down"></i>
+      <Link to="/courses/table">
+        <i className="fas fa-lg fa-list"></i>
+      </Link>
+    </div>
 
     <div className="row">
       {
