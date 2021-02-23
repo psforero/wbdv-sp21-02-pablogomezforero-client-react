@@ -100,24 +100,21 @@ export default class CourseManager extends React.Component {
           addCourse={this.addCourse}
           addAll={this.addAll}/>
 
-        <div className="container-fluid">
-
-          <Route path="/courses/table">
-            <CourseTable
-              deleteCourse={this.deleteCourse}
-              updateCourse={this.updateCourse}
-              courses={this.state.courses}/>
-          </Route>
-          <Route path="/courses/grid">
-            <CourseGrid
-              deleteCourse={this.deleteCourse}
-              courses={this.state.courses}/>
-          </Route>
-          <Route path="/courses/editor"
-                 render={(props) =>
-                   <CourseEditor {...props}/>}>
-          </Route>
-        </div>
+        <Route path="/courses/table">
+          <CourseTable
+            deleteCourse={this.deleteCourse}
+            updateCourse={this.updateCourse}
+            courses={this.state.courses}/>
+        </Route>
+        <Route path="/courses/grid">
+          <CourseGrid
+            deleteCourse={this.deleteCourse}
+            courses={this.state.courses}/>
+        </Route>
+        <Route path="/courses/editor"
+               render={(props) =>
+                 <CourseEditor {...props}/>}>
+        </Route>
       </div>
     );
   }

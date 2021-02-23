@@ -1,10 +1,16 @@
 import CourseManager from "./components/course-manager";
-import {BrowserRouter} from "react-router-dom";
+import {BrowserRouter, Route} from "react-router-dom";
+import Home from "./components/Home";
 
 const App = () =>
   <BrowserRouter>
-    <div className="App">
-      <CourseManager/>
+    <div className="container-fluid">
+      <Route path="/" exact={true}>
+        <Home/>
+      </Route>
+      <Route path="/courses">
+        <CourseManager/>
+      </Route>
     </div>
   </BrowserRouter>
 

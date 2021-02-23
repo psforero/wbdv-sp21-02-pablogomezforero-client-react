@@ -11,14 +11,14 @@ export default class CourseTable extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="container-fluid">
         <table className="table">
           <thead>
-          <tr>
-            <th>Class title</th>
-            <th>Owned by</th>
-            <th>Last modified</th>
-            <th>
+          <tr className="row">
+            <th className="col-4">Class title</th>
+            <th className="col-3">Owned by</th>
+            <th className="col-3">Last modified</th>
+            <th className="col-2">
               <div className="float-right">
                 <i className="fas fa-fw fa-lg fa-folder"></i>
                 <i className="fas fa-fw fa-lg fa-sort-alpha-down"></i>

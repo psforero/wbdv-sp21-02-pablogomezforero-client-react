@@ -22,9 +22,9 @@ const Navbar = ({addCourse, addAll}) => {
         </div>
 
         <div className="col-2">
-          <h2 className="navbar-brand d-none d-md-block">
+          <p className="navbar-brand d-none d-md-block">
             Course Manager
-          </h2>
+          </p>
         </div>
 
         <div className="col">
