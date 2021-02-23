@@ -20,10 +20,10 @@ export default class CourseTable extends React.Component {
             <th>Last modified</th>
             <th>
               <div className="float-right">
-                <i className="fas fa-lg fa-folder"></i>
-                <i className="fas fa-lg fa-sort-alpha-down"></i>
+                <i className="fas fa-fw fa-lg fa-folder"></i>
+                <i className="fas fa-fw fa-lg fa-sort-alpha-down"></i>
                 <Link to="/courses/grid">
-                  <i className="fas fa-lg fa-th"></i>
+                  <i className="fas fa-fw fa-lg fa-th"></i>
                 </Link>
               </div>
             </th>

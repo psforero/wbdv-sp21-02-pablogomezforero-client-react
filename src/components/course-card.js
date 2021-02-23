@@ -1,7 +1,10 @@
 import React from "react";
 import {Link} from "react-router-dom";
 
-const CourseCard = ({title, owner, lastModified}) =>
+const CourseCard = ({title, owner, lastModified}) => {
+
+
+  return (
   <div className="col-3">
     <div className="card" style={{width: "18rem"}}>
       <img
@@ -25,4 +28,6 @@ const CourseCard = ({title, owner, lastModified}) =>
       </div>
     </div>
   </div>
+  )
+}
 export default CourseCard;

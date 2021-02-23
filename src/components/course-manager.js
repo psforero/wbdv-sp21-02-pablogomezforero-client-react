@@ -3,7 +3,7 @@ import {Route} from 'react-router-dom'
 import Navbar from "./course-navbar";
 import CourseTable from "./course-table";
 import CourseGrid from "./course-grid";
-import CourseEditor from "../course-editor";
+import CourseEditor from "./course-editor";
 import courseService from "../services/course-service";
 import {act} from "@testing-library/react";
 
@@ -38,6 +38,13 @@ export default class CourseManager extends React.Component {
     });
   }
 
+  deleteAll = () => {
+    this.state.courses.forEach(course => {
+      console.log(course);
+      this.deleteCourse(course);
+    });
+  }
+
   componentDidMount = () => {
     courseService.findAllCourses()
       .then(actualCourses => this.setState(
@@ -56,7 +63,7 @@ export default class CourseManager extends React.Component {
             courses: [
               ...prevState.courses,
               course
-            ]
+            ],
           }
         )));
   };
