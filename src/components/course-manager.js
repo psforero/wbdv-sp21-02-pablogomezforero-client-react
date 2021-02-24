@@ -1,7 +1,7 @@
 import React from 'react'
 import {Route} from 'react-router-dom'
 import Navbar from "./course-navbar";
-import CourseTable from "./course-table";
+import CourseTable from "./course-table/course-table";
 import CourseGrid from "./course-grid";
 import CourseEditor from "./course-editor";
 import courseService from "../services/course-service";
@@ -109,6 +109,7 @@ export default class CourseManager extends React.Component {
         <Route path="/courses/grid">
           <CourseGrid
             deleteCourse={this.deleteCourse}
+            updateCourse={this.updateCourse}
             courses={this.state.courses}/>
         </Route>
         <Route path="/courses/editor"

@@ -24,8 +24,8 @@ const CourseRow = (
   }
 
   return (
-    <tr>
-      <td>
+    <tr className="row">
+      <td className="col-4">
         {
           !editing && <Link to="/courses/editor">
             {title}
@@ -37,14 +37,15 @@ const CourseRow = (
                             value={newTitle}
                             onChange={event => setNewTitle(event.target.value)}/>
         }
-
       </td>
-      <td>{owner}</td>
-      <td>{lastModified}</td>
-      <td>
-        {!editing && <i className="fas fa-fw fa-edit" onClick={() => setEditing(true)}></i>}
-        {editing && <i className="fas fa-fw fa-check" onClick={() => saveTitle()}></i>}
-        <i className="fas fa-fw fa-trash" onClick={() => deleteCourse(course)}></i>
+      <td className="col-3 wd-owned-by-col">{owner}</td>
+      <td className="col-3 wd-last-mod-col">{lastModified}</td>
+      <td className="col-2">
+        <div className="float-right">
+          {!editing && <i className="fas fa-fw fa-edit" onClick={() => setEditing(true)}></i>}
+          {editing && <i className="fas fa-fw fa-check" onClick={() => saveTitle()}></i>}
+          <i className="fas fa-fw fa-trash" onClick={() => deleteCourse(course)}></i>
+        </div>
       </td>
     </tr>)
 }

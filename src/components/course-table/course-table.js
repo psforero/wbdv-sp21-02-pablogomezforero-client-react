@@ -1,5 +1,5 @@
 import React from 'react'
-import CourseRow from "./course-row";
+import CourseRow from "../course-row";
 import {Link} from "react-router-dom";
 
 
@@ -11,14 +11,14 @@ export default class CourseTable extends React.Component {
 
   render() {
     return (
-      <div className="container-fluid">
-        <table className="table">
+      <div>
+        <table className="table table-hover">
           <thead>
           <tr className="row">
             <th className="col-4">Class title</th>
-            <th className="col-3">Owned by</th>
-            <th className="col-3">Last modified</th>
-            <th className="col-2">
+            <th className="col-3 wd-owned-by-col">Owned by</th>
+            <th className="col-2 wd-last-mod-col">Last modified</th>
+            <th className="col-3">
               <div className="float-right">
                 <i className="fas fa-fw fa-lg fa-folder"></i>
                 <i className="fas fa-fw fa-lg fa-sort-alpha-down"></i>

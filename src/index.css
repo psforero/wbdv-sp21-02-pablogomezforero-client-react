@@ -1,17 +1,58 @@
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
 
-.fas {
-  vertical-align: middle;
+.fa-plus-circle {
+    color: forestgreen;
+}
+
+.fa-plus-circle:hover {
+    color: darkseagreen;
+    transition: .10s ease-in;
+}
+
+.fa-trash {
+    color: gray;
+}
+
+.fa-trash:hover {
+    color: darkred;
+    transition: .25s ease-in;
+}
+
+.fa-edit {
+    color: gray;
+}
+
+.fa-edit:hover {
+    color: dodgerblue;
+    transition: .25s ease-in;
+}
+
+.fa-check {
+    color: gray;
+}
+
+.fa-check:hover {
+    color: forestgreen;
+    transition: .25s ease-in;
+}
+
+#wd-grid-view-icons {
+    background-color: red;
+}
+
+.card {
+    width: 17rem;
+    margin-bottom: 1rem;
 }
