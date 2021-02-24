@@ -4,6 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import '@fortawesome/fontawesome-free/css/all.min.css'
 import './index.css';
 import './components/course-table/course-table.css'
+import './components/course-navbar/course-navbar.css'
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 

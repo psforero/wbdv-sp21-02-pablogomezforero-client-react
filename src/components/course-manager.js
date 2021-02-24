@@ -1,6 +1,6 @@
 import React from 'react'
 import {Route} from 'react-router-dom'
-import Navbar from "./course-navbar";
+import Navbar from "./course-navbar/course-navbar";
 import CourseTable from "./course-table/course-table";
 import CourseGrid from "./course-grid";
 import CourseEditor from "./course-editor";

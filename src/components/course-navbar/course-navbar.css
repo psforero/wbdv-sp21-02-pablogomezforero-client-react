@@ -1,0 +1,15 @@
+.fa-plus-circle {
+    color: forestgreen;
+}
+
+.fa-plus-circle:hover {
+    color: darkseagreen;
+    transition: .10s ease-in;
+}
+
+#wd-float-btn {
+    position: fixed;
+    margin-top: 22px;
+    bottom:40px;
+    right:40px;
+}

@@ -12,15 +12,6 @@ code {
     monospace;
 }
 
-.fa-plus-circle {
-    color: forestgreen;
-}
-
-.fa-plus-circle:hover {
-    color: darkseagreen;
-    transition: .10s ease-in;
-}
-
 .fa-trash {
     color: gray;
 }
@@ -46,10 +37,6 @@ code {
 .fa-check:hover {
     color: forestgreen;
     transition: .25s ease-in;
-}
-
-#wd-grid-view-icons {
-    background-color: red;
 }
 
 .card {

@@ -7,7 +7,7 @@ const CourseGrid = ({deleteCourse, updateCourse, courses}) =>
     <table className="table">
       <thead>
       <tr className="row">
-        <th className="col-10">Courses</th>
+        <th className="col">Courses</th>
         <th className="col-2">
           <div className="float-right">
             <i className="fas fa-fw fa-lg fa-folder"></i>
