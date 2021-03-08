@@ -2,8 +2,8 @@ import React from 'react'
 import {Route} from 'react-router-dom'
 import Navbar from "./course-navbar/course-navbar";
 import CourseTable from "./course-table/course-table";
-import CourseGrid from "./course-grid";
-import CourseEditor from "./course-editor";
+import CourseGrid from "./course-grid/course-grid";
+import CourseEditor from "./course-editor/course-editor";
 import courseService from "../services/course-service";
 import {act} from "@testing-library/react";
 

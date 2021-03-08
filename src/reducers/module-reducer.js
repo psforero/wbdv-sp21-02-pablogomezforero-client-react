@@ -7,14 +7,20 @@ const initialState = {
   ]
 }
 
-const modulerReducer = (state = initialState, action) => {
+const moduleReducer = (state = initialState, action) => {
   switch (action.type) {
     case 'CREATE_MODULE':
-    case 'DELETE_MODULE':
+      const newState = {
+        modules: [...state.modules, { _id: 567, title: 'Module E' }]
+      };
+      return newState;
+    case 'FIND_MODULES_FOR_COURSE':
+    case 'FIND_MODULE':
     case 'UPDATE_MODULE':
+    case 'DELETE_MODULE':
     default:
       return state;
   }
 }
 
-export default modulerReducer;
+export default moduleReducer;
