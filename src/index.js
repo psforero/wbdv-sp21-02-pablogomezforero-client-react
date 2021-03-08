@@ -8,7 +8,6 @@ import './components/course-navbar/course-navbar.css'
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
-
 ReactDOM.render(
   <App/>,
   document.getElementById('root')
