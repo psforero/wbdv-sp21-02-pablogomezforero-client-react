@@ -1,13 +1,13 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import moduleReducer from '../../reducers/module-reducer';
 import EditableItem from './editable-item';
 
 const ModuleList = (
   {
     modules = [],
     createModule,
-    deleteModule
+    deleteModule,
+    updateModule
   }
 ) =>
   <div>
@@ -19,11 +19,12 @@ const ModuleList = (
             <EditableItem
               item={module}
               deleteItem={deleteModule}
+              updateItem={updateModule}
             />
           </li>
         )
       }
-      <li className="list-group-item" onClick={createModule}>
+      <li className="list-group-item text-center" onClick={createModule}>
         <i className="fas fa-plus fa-2x"/>
       </li>
     </ul>
@@ -39,12 +40,18 @@ const dtpm = (dispatch) => {
     createModule: () => {
       dispatch({ type: 'CREATE_MODULE' })
     },
-    deleteModule: (item) => {
+    deleteModule: (module) => {
       dispatch({
         type: 'DELETE_MODULE',
-        module: item
+        module
       })
-    }
+    },
+    updateModule: (module) => {
+      dispatch({
+        type: 'UPDATE_MODULE',
+        module
+      });
+    },
   }
 }
 

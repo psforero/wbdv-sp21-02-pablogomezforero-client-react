@@ -11,11 +11,17 @@ const moduleReducer = (state = initialState, action) => {
   switch (action.type) {
     case 'CREATE_MODULE':
       return {
-        modules: [...state.modules, { _id: 567, title: 'Module E' }]
+        modules: [...state.modules, { _id: 567, title: 'New Module' }]
       };
     case 'FIND_MODULES_FOR_COURSE':
     case 'FIND_MODULE':
     case 'UPDATE_MODULE':
+      return {
+        modules: state.modules.map (module => {
+          return (module._id === action.module._id) ? action.module : module;
+          }
+        )
+      }
     case 'DELETE_MODULE':
       return {
         modules: state.modules.filter(module => {

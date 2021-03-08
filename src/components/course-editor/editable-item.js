@@ -1,13 +1,13 @@
 import React, { useState } from 'react'
-import { connect } from 'react-redux'
 
 const EditableItem = (
   {
+    item = { title: 'Some Title', _id: 'ABC' },
     deleteItem,
-    item = { title: 'Some Title', _id: 'ABC' }
+    updateItem
   }) => {
-
   const [editing, setEditing] = useState(false);
+  const [cachedItem, setCachedItem] = useState(item);
 
   return (
     <>
@@ -15,26 +15,33 @@ const EditableItem = (
         !editing &&
         <>
           {item.title}
-          <i className="fas fa-fw fa-edit float-right" onClick={() => setEditing(true)}/>
+          <i className="fas fa-fw fa-edit float-right" onClick={() => {
+            setEditing(true)
+            setCachedItem(item);
+          }}/>
         </>
       }
       {
         editing &&
         <>
-          <input type="text"/>
-          <i className="fas fa-fw fa-check float-right" onClick={() => setEditing(false)}/>
-          <i className="fas fa-fw fa-trash float-right" onClick={() => deleteItem(item)}/>
+          <input
+            type="text"
+            onChange={(e) =>
+              setCachedItem({ ...cachedItem, title: e.target.value })}
+            value={cachedItem.title}
+          />
+          <i className="fas fa-fw fa-check float-right" onClick={() => {
+            setEditing(false);
+            updateItem(cachedItem);
+          }}/>
+          <i className="fas fa-fw fa-trash float-right" onClick={() => {
+            setEditing(false);
+            deleteItem(item)
+          }}/>
         </>
       }
     </>
   )
 }
 
-const stpm = (item) => {
-
-}
-
-const dtpm = (dispatch) => {
-}
-
-export default EditableItem//connect(stpm, dtpm)(EditableItem);
+export default EditableItem;

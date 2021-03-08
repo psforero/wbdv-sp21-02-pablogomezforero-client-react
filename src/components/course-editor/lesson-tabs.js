@@ -6,17 +6,18 @@ const LessonTabs = (
   {
     lessons = [],
     createLesson,
-    deleteLesson
+    deleteLesson,
+    updateLesson
   }
 ) =>
   <div>
-    <h2>Lessons</h2>
+    <h2>Lessons {lessons.length}</h2>
     <ul className="nav nav-tabs nav-justified">
       {
         lessons.map((lesson) =>
           <li className="nav-item">
             <a className="nav-link" href="#">
-              <EditableItem item={lesson} deleteItem={deleteLesson}/>
+              <EditableItem item={lesson} deleteItem={deleteLesson} updateItem={updateLesson}/>
             </a>
           </li>
         )
@@ -37,8 +38,21 @@ const stpm = (state) => {
 
 const dtpm = (dispatch) => {
   return {
-    createLesson: () => alert('create new lesson'),
-    deleteLesson: (item) => alert(`delete lesson ${item.title}`)
+    createLesson: () => {
+      dispatch({ type: 'CREATE_LESSON' });
+    },
+    deleteLesson: (lesson) => {
+      dispatch({
+        type: 'DELETE_LESSON',
+        lesson
+      })
+    },
+    updateLesson: (lesson) => {
+      dispatch({
+        type: 'UPDATE_LESSON',
+        lesson
+      })
+    }
   }
 }
 
