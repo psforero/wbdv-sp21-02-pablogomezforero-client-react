@@ -27,7 +27,7 @@ const CourseRow = (
     <tr className="row">
       <td className="col-4">
         {
-          !editing && <Link to="/courses/editor">
+          !editing && <Link to={`/courses/editor/${course._id}`}>
             {title}
           </Link>
         }
@@ -42,9 +42,9 @@ const CourseRow = (
       <td className="col-3 wd-last-mod-col">{lastModified}</td>
       <td className="col-2">
         <div className="float-right">
-          {!editing && <i className="fas fa-fw fa-edit" onClick={() => setEditing(true)}></i>}
-          {editing && <i className="fas fa-fw fa-check" onClick={() => saveTitle()}></i>}
-          <i className="fas fa-fw fa-trash" onClick={() => deleteCourse(course)}></i>
+          {!editing && <i className="fas fa-fw fa-edit" onClick={() => setEditing(true)}/>}
+          {editing && <i className="fas fa-fw fa-check" onClick={() => saveTitle()}/>}
+          <i className="fas fa-fw fa-trash" onClick={() => deleteCourse(course)}/>
         </div>
       </td>
     </tr>)

@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import EditableItem from './editable-item';
+import { Link, useParams } from 'react-router-dom';
 
 const TopicPills = (
   {
@@ -9,26 +10,32 @@ const TopicPills = (
     deleteTopic,
     updateTopic
   }
-) =>
-  <div>
-    <h3>Topics {topics.length}</h3>
-    <ul className="nav nav-pills nav-justified">
-      {
-        topics.map(topic =>
-          <li className="nav-item">
-            <a className="nav-link" href="#">
-              <EditableItem item={topic} deleteItem={deleteTopic} updateItem={updateTopic}/>
-            </a>
-          </li>
-        )
-      }
-      <li className="nav-item">
-        <a className="nav-link" href="#">
-          <i className="fas fa-plus fa-lg" onClick={createTopic}/>
+) => {
+  const { courseId, moduleId, lessonId } = useParams();
+  return (
+    <div>
+      <h3>Topics --> lessonId: {lessonId}</h3>
+      <div className="nav nav-pills nav-justified">
+        {
+          topics.map(topic =>
+            <Link className="nav-link"
+                  to={`/courses/editor/${courseId}/${moduleId}/${lessonId}/${topic._id}`}>
+              <EditableItem
+                item={topic}
+                deleteItem={deleteTopic}
+                updateItem={updateTopic}/>
+            </Link>
+          )
+        }
+        <a className="nav-link"
+           href="#"
+           onClick={createTopic}>
+          <i className="fas fa-plus fa-lg"/>
         </a>
-      </li>
-    </ul>
-  </div>
+      </div>
+    </div>
+  )
+}
 
 const stpm = (state) => {
   return {

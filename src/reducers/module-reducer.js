@@ -1,9 +1,9 @@
 const initialState = {
   modules: [
-    { _id: 123, title: 'Module A' },
-    { _id: 234, title: 'Module B' },
-    { _id: 345, title: 'Module C' },
-    { _id: 456, title: 'Module D' },
+    { _id: 'M111', title: 'Module A' },
+    { _id: 'M222', title: 'Module B' },
+    { _id: 'M333', title: 'Module C' },
+    { _id: 'M444', title: 'Module D' },
   ]
 }
 
@@ -14,6 +14,8 @@ const moduleReducer = (state = initialState, action) => {
         modules: [...state.modules, { _id: 567, title: 'New Module' }]
       };
     case 'FIND_MODULES_FOR_COURSE':
+      alert("Finding Modules for Course");
+      return state;
     case 'FIND_MODULE':
     case 'UPDATE_MODULE':
       return {

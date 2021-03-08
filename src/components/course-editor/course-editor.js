@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { combineReducers, createStore } from 'redux';
 import moduleReducer from '../../reducers/module-reducer';
@@ -17,30 +17,33 @@ const reducer = combineReducers({
 
 const store = createStore(reducer);
 
-const CourseEditor = ({ history }) =>
-  <Provider store={store}>
+const CourseEditor = ({ history }) => {
+  const { courseId } = useParams();
+  return (
+    <Provider store={store}>
 
-    <div className="row">
-      <Link className="col-1">
-        <i className="fas fa-fw fa-2x fa-arrow-left float-left" onClick={() => history.goBack()}/>
-      </Link>
-      <h2 className="col">
-        Course Editor
-      </h2>
-    </div>
-
-    <div className="row">
-      <div className="col-4">
-        <ModuleList/>
+      <div className="row">
+        <Link className="col-1">
+          <i className="fas fa-fw fa-2x fa-arrow-left float-left" onClick={() => history.goBack()}/>
+        </Link>
+        <h2 className="col">
+          Course Editor
+        </h2>
       </div>
-      <div className="col-8">
-        <LessonTabs/>
-        <div>
-          <TopicPills/>
+
+      <div className="row">
+        <div className="col-4">
+          <ModuleList/>
+        </div>
+        <div className="col-8">
+          <LessonTabs/>
+          <div>
+            <TopicPills/>
+          </div>
         </div>
       </div>
-    </div>
-
-  </Provider>
+    </Provider>
+  )
+}
 
 export default CourseEditor

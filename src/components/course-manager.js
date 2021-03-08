@@ -1,11 +1,11 @@
 import React from 'react'
-import {Route} from 'react-router-dom'
-import Navbar from "./course-navbar/course-navbar";
-import CourseTable from "./course-table/course-table";
-import CourseGrid from "./course-grid/course-grid";
-import CourseEditor from "./course-editor/course-editor";
-import courseService from "../services/course-service";
-import {act} from "@testing-library/react";
+import { Route } from 'react-router-dom'
+import Navbar from './course-navbar/course-navbar';
+import CourseTable from './course-table/course-table';
+import CourseGrid from './course-grid/course-grid';
+import CourseEditor from './course-editor/course-editor';
+import courseService from '../services/course-service';
+import { act } from '@testing-library/react';
 
 export default class CourseManager extends React.Component {
   state = {
@@ -14,12 +14,12 @@ export default class CourseManager extends React.Component {
 
   addAll = () => {
     const initialCourses = [
-      {title: "CS1234", owner: "Alice", lastModified: "1/2/21"},
-      {title: "CS2345", owner: "Bob", lastModified: "2/2/22"},
-      {title: "CS3456", owner: "Carlos", lastModified: "1/2/23"},
-      {title: "CS4567", owner: "Dan", lastModified: "1/2/24"},
-      {title: "CS5678", owner: "Ellie", lastModified: "1/2/25"},
-      {title: "CS6789", owner: "Frankie", lastModified: "1/2/26"},
+      { title: 'CS1234', owner: 'Alice', lastModified: '1/2/21' },
+      { title: 'CS2345', owner: 'Bob', lastModified: '2/2/22' },
+      { title: 'CS3456', owner: 'Carlos', lastModified: '1/2/23' },
+      { title: 'CS4567', owner: 'Dan', lastModified: '1/2/24' },
+      { title: 'CS5678', owner: 'Ellie', lastModified: '1/2/25' },
+      { title: 'CS6789', owner: 'Frankie', lastModified: '1/2/26' },
     ];
 
     initialCourses.forEach(course => {
@@ -112,9 +112,16 @@ export default class CourseManager extends React.Component {
             updateCourse={this.updateCourse}
             courses={this.state.courses}/>
         </Route>
-        <Route path="/courses/editor"
-               render={(props) =>
-                 <CourseEditor {...props}/>}>
+        <Route
+          path={[
+            '/courses/editor/:courseId',
+            '/courses/editor/:courseId/:moduleId',
+            '/courses/editor/:courseId/:moduleId/:lessonId',
+            '/courses/editor/:courseId/:moduleId/:lessonId/:topicId',
+          ]}
+          exact={true}
+          render={(props) =>
+            <CourseEditor {...props}/>}>
         </Route>
       </div>
     );

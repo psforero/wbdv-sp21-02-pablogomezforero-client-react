@@ -1,9 +1,9 @@
 const initialState = {
   lessons: [
-    { _id: 10, title: 'Lesson 100' },
-    { _id: 20, title: 'Lesson 200' },
-    { _id: 30, title: 'Lesson 300' },
-    { _id: 40, title: 'Lesson 400' },
+    { _id: 'LAAA', title: 'Lesson 100' },
+    { _id: 'LBBB', title: 'Lesson 200' },
+    { _id: 'LCCC', title: 'Lesson 300' },
+    { _id: 'LDDD', title: 'Lesson 400' },
   ]
 };
 

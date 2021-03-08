@@ -1,34 +1,47 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import EditableItem from './editable-item';
+import { Link, useParams } from 'react-router-dom';
+import { findModulesForCourse } from 'src/services/module-service'
 
 const ModuleList = (
   {
     modules = [],
     createModule,
     deleteModule,
-    updateModule
+    updateModule,
+    findModulesForCourse
   }
-) =>
-  <div>
-    <h2>Modules</h2>
-    <ul className="list-group">
-      {
-        modules.map((module) =>
-          <li className="list-group-item">
-            <EditableItem
-              item={module}
-              deleteItem={deleteModule}
-              updateItem={updateModule}
-            />
-          </li>
-        )
-      }
-      <li className="list-group-item text-center" onClick={createModule}>
-        <i className="fas fa-plus fa-lg"/>
-      </li>
-    </ul>
-  </div>
+) => {
+  const { courseId } = useParams();
+  useEffect(() => {
+    findModulesForCourse(courseId);
+  });
+  return (
+    <div>
+      <h2>Modules --> courseId: {courseId}</h2>
+      <div className="list-group">
+        {
+          modules.map((module) =>
+            <Link className="list-group-item list-group-item-action"
+                  to={`/courses/editor/${courseId}/${module._id}`}>
+              <EditableItem
+                item={module}
+                deleteItem={deleteModule}
+                updateItem={updateModule}
+              />
+            </Link>
+          )
+        }
+        <a className="list-group-item list-group-item-action text-center"
+           href="#"
+           onClick={createModule}>
+          <i className="fas fa-plus fa-lg"/>
+        </a>
+      </div>
+    </div>
+  )
+}
 
 const stpm = (state) => {
   return {
@@ -50,6 +63,12 @@ const dtpm = (dispatch) => {
       dispatch({
         type: 'UPDATE_MODULE',
         module
+      })
+    },
+    findModulesForCourse: (courseId) => {
+      dispatch({
+        type: 'FIND_MODULES_FOR_COURSE',
+        courseId
       })
     }
   }
