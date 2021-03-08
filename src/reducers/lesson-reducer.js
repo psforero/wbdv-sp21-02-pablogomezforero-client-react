@@ -18,13 +18,13 @@ const lessonReducer = (state = initialState, action) => {
     case 'UPDATE_LESSON':
       return {
         lessons: state.lessons.map((lesson) => {
-          return (action.lesson._id === lesson._id) ? action.lesson : lesson;
+          return (lesson._id === action.lesson._id) ? action.lesson : lesson;
         })
       }
     case 'DELETE_LESSON':
       return {
         lessons: state.lessons.filter((lesson) => {
-          return action.lesson._id !== lesson._id;
+          return lesson._id !== action.lesson._id;
         })
       }
     default:

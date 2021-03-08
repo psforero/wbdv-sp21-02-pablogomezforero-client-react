@@ -25,7 +25,7 @@ const ModuleList = (
         )
       }
       <li className="list-group-item text-center" onClick={createModule}>
-        <i className="fas fa-plus fa-2x"/>
+        <i className="fas fa-plus fa-lg"/>
       </li>
     </ul>
   </div>
@@ -50,8 +50,8 @@ const dtpm = (dispatch) => {
       dispatch({
         type: 'UPDATE_MODULE',
         module
-      });
-    },
+      })
+    }
   }
 }
 

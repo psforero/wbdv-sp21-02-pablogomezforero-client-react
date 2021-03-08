@@ -24,7 +24,7 @@ const LessonTabs = (
       }
       <li className="nav-item" onClick={createLesson}>
         <a className="nav-link" href="#">
-          <i className="fas fa-plus fa-2x"/>
+          <i className="fas fa-plus fa-lg"/>
         </a>
       </li>
     </ul>
