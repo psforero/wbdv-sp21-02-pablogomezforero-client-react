@@ -1,19 +1,29 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import moduleReducer from '../../reducers/module-reducer';
+import EditableItem from './editable-item';
 
-const ModuleList = ({ modules = [], createModule }) =>
+const ModuleList = (
+  {
+    modules = [],
+    createModule,
+    deleteModule
+  }
+) =>
   <div>
     <h2>Modules</h2>
     <ul className="list-group">
       {
         modules.map((module) =>
           <li className="list-group-item">
-            {module.title}
+            <EditableItem
+              item={module}
+              deleteItem={deleteModule}
+            />
           </li>
         )
       }
-      <li onClick={createModule} className="list-group-item">
+      <li className="list-group-item" onClick={createModule}>
         <i className="fas fa-plus fa-2x"/>
       </li>
     </ul>
@@ -28,6 +38,12 @@ const dtpm = (dispatch) => {
   return {
     createModule: () => {
       dispatch({ type: 'CREATE_MODULE' })
+    },
+    deleteModule: (item) => {
+      dispatch({
+        type: 'DELETE_MODULE',
+        module: item
+      })
     }
   }
 }

@@ -10,14 +10,18 @@ const initialState = {
 const moduleReducer = (state = initialState, action) => {
   switch (action.type) {
     case 'CREATE_MODULE':
-      const newState = {
+      return {
         modules: [...state.modules, { _id: 567, title: 'Module E' }]
       };
-      return newState;
     case 'FIND_MODULES_FOR_COURSE':
     case 'FIND_MODULE':
     case 'UPDATE_MODULE':
     case 'DELETE_MODULE':
+      return {
+        modules: state.modules.filter(module => {
+          return module._id !== action.module._id
+        })
+      };
     default:
       return state;
   }
