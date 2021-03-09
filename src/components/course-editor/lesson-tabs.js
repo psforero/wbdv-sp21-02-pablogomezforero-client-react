@@ -19,7 +19,7 @@ const LessonTabs = (
   }, [moduleId]);
   return (
     <div>
-      <h2>Lessons --> moduleId: {moduleId.slice(moduleId.length - 4)}</h2>
+      <h2>Lessons</h2>
       <div className="nav nav-tabs nav-justified">
         {
           lessons.map((lesson) =>

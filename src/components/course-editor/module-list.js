@@ -19,7 +19,7 @@ const ModuleList = (
   }, []);
   return (
     <div>
-      <h2>Modules --> courseId: {courseId.slice(courseId.length-4)}</h2>
+      <h2>Modules</h2>
       <div className="list-group">
         {
           modules.map((module) =>

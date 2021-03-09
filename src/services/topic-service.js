@@ -15,9 +15,25 @@ export const createTopic = (lessonId, topic) =>
   })
     .then(response => response.json());
 
+export const deleteTopic = (topicId) =>
+  fetch(`${TOPICS_URL}/${topicId}`, {
+    method: 'DELETE'
+  })
+    .then(response => response.json());
+
+export const updateTopic = (topicId, topic) =>
+  fetch(`${TOPICS_URL}/${topicId}`, {
+    method: 'PUT',
+    body: JSON.stringify(topic),
+    headers: {
+      'content-type': 'application/json'
+    }
+  })
+
 const api = {
   findTopicsForLesson,
-  createTopic
+  createTopic,
+  deleteTopic
 };
 
 export default api;

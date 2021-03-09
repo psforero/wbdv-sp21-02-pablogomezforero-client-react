@@ -20,7 +20,7 @@ const moduleReducer = (state = initialState, action) => {
             return (module._id === action.module._id) ? action.module : module;
           }
         )
-      }
+      };
     case 'DELETE_MODULE':
       return {
         modules: state.modules.filter(module => {

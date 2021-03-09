@@ -15,11 +15,11 @@ const TopicPills = (
 ) => {
   const { courseId, moduleId, lessonId } = useParams();
   useEffect(() => {
-    findTopicsForLesson(moduleId)
-  }, []);
+    findTopicsForLesson(lessonId)
+  }, [lessonId]);
   return (
     <div>
-      <h3>Topics --> lessonId: {lessonId.slice(lessonId.length - 5)}</h3>
+      <h3>Topics</h3>
       <div className="nav nav-pills nav-justified">
         {
           topics.map(topic =>
@@ -34,7 +34,7 @@ const TopicPills = (
         }
         <a className="nav-link"
            href="#"
-           onClick={createTopic}>
+           onClick={() => createTopic(lessonId)}>
           <i className="fas fa-plus fa-lg"/>
         </a>
       </div>
@@ -50,14 +50,19 @@ const stpm = (state) => {
 
 const dtpm = (dispatch) => {
   return {
-    createTopic: () => {
-      dispatch({ type: 'CREATE_TOPIC' })
+    createTopic: (lessonId) => {
+      topicService.createTopic(lessonId, { title: 'New Topic' })
+        .then(savedTopic => dispatch({
+          type: 'CREATE_TOPIC',
+          topic: savedTopic
+        }));
     },
     deleteTopic: (topic) => {
-      dispatch({
-        type: 'DELETE_TOPIC',
-        topic
-      })
+      topicService.deleteTopic(topic._id)
+        .then(status => dispatch({
+          type: 'DELETE_TOPIC',
+          topic
+        }));
     },
     updateTopic: (topic) => {
       dispatch({
