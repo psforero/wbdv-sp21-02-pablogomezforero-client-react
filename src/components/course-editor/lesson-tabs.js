@@ -16,7 +16,7 @@ const LessonTabs = (
   const { courseId, moduleId } = useParams();
   useEffect(() => {
     findLessonsForModule(moduleId)
-  }, []);
+  }, [moduleId]);
   return (
     <div>
       <h2>Lessons --> moduleId: {moduleId.slice(moduleId.length - 4)}</h2>
@@ -34,7 +34,7 @@ const LessonTabs = (
         }
         <a className="nav-link"
            href="#"
-           onClick={createLesson}>
+           onClick={() => createLesson(moduleId)}>
           <i className="fas fa-plus fa-lg"/>
         </a>
       </div>
@@ -50,20 +50,26 @@ const stpm = (state) => {
 
 const dtpm = (dispatch) => {
   return {
-    createLesson: () => {
-      dispatch({ type: 'CREATE_LESSON' });
+    createLesson: (moduleId) => {
+      lessonService.createLesson(moduleId, { title: 'New Lesson' })
+        .then(savedLesson => dispatch({
+          type: 'CREATE_LESSON',
+          lesson: savedLesson
+        }));
     },
     deleteLesson: (lesson) => {
-      dispatch({
-        type: 'DELETE_LESSON',
-        lesson
-      })
+      lessonService.deleteLesson(lesson._id)
+        .then(status => dispatch({
+          type: 'DELETE_LESSON',
+          lesson
+        }));
     },
     updateLesson: (lesson) => {
-      dispatch({
-        type: 'UPDATE_LESSON',
-        lesson
-      })
+      lessonService.updateLesson(lesson._id, lesson)
+        .then(status => dispatch({
+          type: 'UPDATE_LESSON',
+          lesson
+        }));
     },
     findLessonsForModule: (moduleId => {
       lessonService.findLessonsForModule(moduleId)

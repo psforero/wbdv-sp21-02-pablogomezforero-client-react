@@ -1,7 +1,11 @@
 const COURSES_URL = 'https://wbdv-generic-server.herokuapp.com/api/pforero731151/courses'
 const MODULES_URL = 'https://wbdv-generic-server.herokuapp.com/api/pforero731151/modules'
 
-export const createModuleForCourse = (courseId, module) =>
+export const findModulesForCourse = (courseId) =>
+  fetch(`${COURSES_URL}/${courseId}/modules`)
+    .then(response => response.json());
+
+export const createModule = (courseId, module) =>
   fetch(`${COURSES_URL}/${courseId}/modules`, {
     method: 'POST',
     body: JSON.stringify(module),
@@ -9,10 +13,6 @@ export const createModuleForCourse = (courseId, module) =>
       'content-type': 'application/json'
     }
   })
-    .then(response => response.json());
-
-export const findModulesForCourse = (courseId) =>
-  fetch(`${COURSES_URL}/${courseId}/modules`)
     .then(response => response.json());
 
 export const deleteModule = (moduleId) =>
@@ -32,7 +32,7 @@ export const updateModule = (moduleId, module) =>
     .then(response => response.json());
 
 const api = {
-  createModuleForCourse,
+  createModule,
   findModulesForCourse,
   deleteModule,
   updateModule

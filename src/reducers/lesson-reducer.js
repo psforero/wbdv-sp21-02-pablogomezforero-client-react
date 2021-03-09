@@ -6,7 +6,7 @@ const lessonReducer = (state = initialState, action) => {
   switch (action.type) {
     case 'CREATE_LESSON':
       return {
-        lessons: [...state.lessons, { _id: 50, title: 'New Lesson' }]
+        lessons: [...state.lessons, action.lesson]
       }
     case 'FIND_LESSONS_FOR_MODULE':
       return {

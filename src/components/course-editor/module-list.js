@@ -51,7 +51,7 @@ const stpm = (state) => {
 const dtpm = (dispatch) => {
   return {
     createModule: (courseId) => {
-      moduleService.createModuleForCourse(courseId, { title: 'New Module' })
+      moduleService.createModule(courseId, { title: 'New Module' })
         .then(savedModule => dispatch({
           type: 'CREATE_MODULE',
           module: savedModule
@@ -69,7 +69,7 @@ const dtpm = (dispatch) => {
         .then(status => dispatch({
           type: 'UPDATE_MODULE',
           module
-        }))
+        }));
     },
     findModulesForCourse: (courseId) => {
       moduleService.findModulesForCourse(courseId)

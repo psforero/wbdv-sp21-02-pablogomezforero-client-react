@@ -14,7 +14,7 @@ const TopicPills = (
   const { courseId, moduleId, lessonId } = useParams();
   return (
     <div>
-      <h3>Topics --> lessonId: {lessonId}</h3>
+      <h3>Topics --> lessonId: {lessonId.slice(lessonId.length-5)}</h3>
       <div className="nav nav-pills nav-justified">
         {
           topics.map(topic =>

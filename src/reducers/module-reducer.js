@@ -1,6 +1,6 @@
 const initialState = {
   modules: []
-}
+};
 
 const moduleReducer = (state = initialState, action) => {
   switch (action.type) {
