@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import EditableItem from './editable-item';
 import { Link, useParams } from 'react-router-dom';
@@ -12,10 +12,12 @@ const LessonTabs = (
   }
 ) => {
   const { courseId, moduleId } = useParams();
-  console.log(courseId, moduleId);
+  useEffect(() => {
+    findLessonsForModule(moduleId)
+  }, []);
   return (
     <div>
-      <h2>Lessons --> moduleId: {moduleId}</h2>
+      <h2>Lessons --> moduleId: {moduleId.slice(moduleId.length - 4)}</h2>
       <div className="nav nav-tabs nav-justified">
         {
           lessons.map((lesson) =>
