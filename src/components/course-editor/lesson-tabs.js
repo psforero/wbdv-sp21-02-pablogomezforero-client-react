@@ -2,13 +2,15 @@ import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import EditableItem from './editable-item';
 import { Link, useParams } from 'react-router-dom';
+import lessonService from '../../services/lesson-service';
 
 const LessonTabs = (
   {
     lessons = [],
     createLesson,
     deleteLesson,
-    updateLesson
+    updateLesson,
+    findLessonsForModule
   }
 ) => {
   const { courseId, moduleId } = useParams();
@@ -62,7 +64,15 @@ const dtpm = (dispatch) => {
         type: 'UPDATE_LESSON',
         lesson
       })
-    }
+    },
+    findLessonsForModule: (moduleId => {
+      lessonService.findLessonsForModule(moduleId)
+        .then(lessons => dispatch({
+            type: 'FIND_LESSONS_FOR_MODULE',
+            lessons
+          })
+        )
+    })
   }
 }
 

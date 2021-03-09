@@ -1,10 +1,5 @@
 const initialState = {
-  lessons: [
-    { _id: 'LAAA', title: 'Lesson 100' },
-    { _id: 'LBBB', title: 'Lesson 200' },
-    { _id: 'LCCC', title: 'Lesson 300' },
-    { _id: 'LDDD', title: 'Lesson 400' },
-  ]
+  lessons: []
 };
 
 const lessonReducer = (state = initialState, action) => {
@@ -14,6 +9,10 @@ const lessonReducer = (state = initialState, action) => {
         lessons: [...state.lessons, { _id: 50, title: 'New Lesson' }]
       }
     case 'FIND_LESSONS_FOR_MODULE':
+      return {
+        ...state,
+        lessons: action.lessons
+      }
     case 'FIND_LESSON':
     case 'UPDATE_LESSON':
       return {
