@@ -71,14 +71,13 @@ const dtpm = (dispatch) => {
           lesson
         }));
     },
-    findLessonsForModule: (moduleId => {
+    findLessonsForModule: (moduleId) => {
       lessonService.findLessonsForModule(moduleId)
         .then(lessons => dispatch({
-            type: 'FIND_LESSONS_FOR_MODULE',
-            lessons
-          })
-        )
-    })
+          type: 'FIND_LESSONS_FOR_MODULE',
+          lessons
+        }));
+    }
   }
 }
 

@@ -32,8 +32,8 @@ export const updateModule = (moduleId, module) =>
     .then(response => response.json());
 
 const api = {
-  createModule,
   findModulesForCourse,
+  createModule,
   deleteModule,
   updateModule
 };

@@ -1,5 +1,5 @@
-const MODULES_URL = 'https://wbdv-generic-server.herokuapp.com/api/pforero731151/modules' // /MODULE_ID/lessons
-const LESSONS_URL = 'https://wbdv-generic-server.herokuapp.com/api/pforero731151/lessons' // /LESSON_ID
+const MODULES_URL = 'https://wbdv-generic-server.herokuapp.com/api/pforero731151/modules'
+const LESSONS_URL = 'https://wbdv-generic-server.herokuapp.com/api/pforero731151/lessons'
 
 export const findLessonsForModule = (moduleId) =>
   fetch(`${MODULES_URL}/${moduleId}/lessons`)
@@ -32,10 +32,10 @@ export const updateLesson = (lessonId, lesson) =>
     .then(response => response.json());
 
 const api = {
-  createLesson,
   findLessonsForModule,
+  createLesson,
   deleteLesson,
   updateLesson
-}
+};
 
 export default api;
