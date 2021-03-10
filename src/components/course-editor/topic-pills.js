@@ -13,20 +13,20 @@ const TopicPills = (
     findTopicsForLesson
   }
 ) => {
-  const { courseId, moduleId, lessonId } = useParams();
+  const { courseId, moduleId, lessonId, topicId } = useParams();
   const [lessonSelected, setLessonSelected] = useState(lessonId !== 'undefined' && typeof lessonId !== 'undefined');
   useEffect(() => {
     setLessonSelected(lessonId !== 'undefined' && typeof lessonId !== 'undefined');
     findTopicsForLesson(lessonId);
-  }, [lessonId, moduleId]);
+  }, [lessonId, topicId]);
   return (
-    <div>
+    <>
       {
         lessonSelected &&
         <div className="nav nav-pills nav-justified">
           {
             topics.map(topic =>
-              <Link className="nav-link"
+              <Link className={`nav-link ${topic._id === topicId ? 'active' : ''}`}
                     to={`/courses/editor/${courseId}/${moduleId}/${lessonId}/${topic._id}`}>
                 <EditableItem
                   item={topic}
@@ -50,7 +50,7 @@ const TopicPills = (
         !lessonSelected &&
         <p>Please, select a lesson</p>
       }
-    </div>
+    </>
   )
 }
 

@@ -13,23 +13,24 @@ const LessonTabs = (
     findLessonsForModule
   }
 ) => {
-  const { courseId, moduleId } = useParams();
+  const { courseId, moduleId , lessonId} = useParams();
   const [moduleSelected, setModuleSelected] = useState(moduleId !== 'undefined' && typeof moduleId !== 'undefined');
   useEffect(() => {
     setModuleSelected(moduleId !== 'undefined' && typeof moduleId !== 'undefined');
     findLessonsForModule(moduleId);
-  }, [moduleId]);
+  }, [moduleId, lessonId]);
 
   return (
-    <div>
+    <>
       <h2>Lessons</h2>
       {
         moduleSelected &&
         <div className="nav nav-tabs nav-justified">
           {
             lessons.map((lesson) =>
-              <Link className="nav-link"
-                    to={`/courses/editor/${courseId}/${moduleId}/${lesson._id}`}>
+              <Link
+                className={`nav-link ${lesson._id === lessonId ? 'active' : ''}`}
+                to={`/courses/editor/${courseId}/${moduleId}/${lesson._id}`}>
                 <EditableItem
                   item={lesson}
                   deleteItem={deleteLesson}
@@ -52,7 +53,7 @@ const LessonTabs = (
         !moduleSelected &&
         <p>Please, select a module</p>
       }
-    </div>
+    </>
   )
 }
 
