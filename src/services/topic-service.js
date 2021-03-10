@@ -29,11 +29,13 @@ export const updateTopic = (topicId, topic) =>
       'content-type': 'application/json'
     }
   })
+    .then(response => response.json());
 
 const api = {
   findTopicsForLesson,
   createTopic,
-  deleteTopic
+  deleteTopic,
+  updateTopic
 };
 
 export default api;

@@ -6,6 +6,7 @@ const moduleReducer = (state = initialState, action) => {
   switch (action.type) {
     case 'CREATE_MODULE':
       return {
+        ...state,
         modules: [...state.modules, action.module]
       };
     case 'FIND_MODULES_FOR_COURSE':

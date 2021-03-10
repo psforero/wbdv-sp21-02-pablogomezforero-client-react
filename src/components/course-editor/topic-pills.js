@@ -65,10 +65,11 @@ const dtpm = (dispatch) => {
         }));
     },
     updateTopic: (topic) => {
-      dispatch({
-        type: 'UPDATE_TOPIC',
-        topic
-      })
+      topicService.updateTopic(topic._id, topic)
+        .then(status => dispatch({
+          type: 'UPDATE_TOPIC',
+          topic
+        }));
     },
     findTopicsForLesson: (lessonId) => {
       topicService.findTopicsForLesson(lessonId)
