@@ -114,6 +114,7 @@ export default class CourseManager extends React.Component {
         </Route>
         <Route
           path={[
+            '/courses/editor/',
             '/courses/editor/:courseId',
             '/courses/editor/:courseId/:moduleId',
             '/courses/editor/:courseId/:moduleId/:lessonId',

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import EditableItem from './editable-item';
 import { Link, useParams } from 'react-router-dom';
@@ -14,30 +14,44 @@ const LessonTabs = (
   }
 ) => {
   const { courseId, moduleId } = useParams();
+  const [moduleSelected, setModuleSelected] = useState(moduleId !== 'undefined' && typeof moduleId !== 'undefined');
   useEffect(() => {
-    findLessonsForModule(moduleId)
+    setModuleSelected(moduleId !== 'undefined' && typeof moduleId !== 'undefined');
+    findLessonsForModule(moduleId);
   }, [moduleId]);
+
   return (
     <div>
       <h2>Lessons</h2>
-      <div className="nav nav-tabs nav-justified">
-        {
-          lessons.map((lesson) =>
-            <Link className="nav-link"
-                  to={`/courses/editor/${courseId}/${moduleId}/${lesson._id}`}>
-              <EditableItem
-                item={lesson}
-                deleteItem={deleteLesson}
-                updateItem={updateLesson}/>
-            </Link>
-          )
-        }
-        <a className="nav-link"
-           href="#"
-           onClick={() => createLesson(moduleId)}>
-          <i className="fas fa-plus fa-lg"/>
-        </a>
-      </div>
+      {
+        moduleSelected &&
+        <div className="nav nav-tabs nav-justified">
+          {
+            lessons.map((lesson) =>
+              <Link className="nav-link"
+                    to={`/courses/editor/${courseId}/${moduleId}/${lesson._id}`}>
+                <EditableItem
+                  item={lesson}
+                  deleteItem={deleteLesson}
+                  updateItem={updateLesson}/>
+              </Link>
+            )
+          }
+          <a className="nav-link"
+             href="#"
+             onClick={() => createLesson(moduleId)}>
+            {
+              lessons.length <= 0 &&
+              <p>No lessons available. Click here to create a new lesson</p>
+            }
+            <i className="fas fa-plus fa-lg"/>
+          </a>
+        </div>
+      }
+      {
+        !moduleSelected &&
+        <p>Please, select a module</p>
+      }
     </div>
   )
 }

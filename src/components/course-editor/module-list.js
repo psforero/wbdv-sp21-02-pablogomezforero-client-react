@@ -13,9 +13,11 @@ const ModuleList = (
     findModulesForCourse
   }
 ) => {
-  const { courseId } = useParams();
+  const { courseId, moduleId } = useParams();
   useEffect(() => {
-    findModulesForCourse(courseId);
+    if (courseId !== 'undefined' && typeof courseId !== 'undefined') {
+      findModulesForCourse(courseId);
+    }
   }, []);
   return (
     <div>
@@ -23,8 +25,9 @@ const ModuleList = (
       <div className="list-group">
         {
           modules.map((module) =>
-            <Link className="list-group-item list-group-item-action"
-                  to={`/courses/editor/${courseId}/${module._id}`}>
+            <Link
+              className={`list-group-item list-group-item-action ${module._id === moduleId ? 'active' : ''}`}
+              to={`/courses/editor/${courseId}/${module._id}`}>
               <EditableItem
                 item={module}
                 deleteItem={deleteModule}
@@ -60,7 +63,7 @@ const dtpm = (dispatch) => {
     deleteModule: (module) => {
       moduleService.deleteModule(module._id)
         .then(status => dispatch({
-          type:'DELETE_MODULE',
+          type: 'DELETE_MODULE',
           module
         }));
     },
