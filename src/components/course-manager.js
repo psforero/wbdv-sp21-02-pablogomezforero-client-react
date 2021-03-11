@@ -96,17 +96,21 @@ export default class CourseManager extends React.Component {
   render() {
     return (
       <div>
-        <Navbar
-          addCourse={this.addCourse}
-          addAll={this.addAll}/>
-
-        <Route path="/courses/table">
+        <Route path="/courses/table"
+               exact={true}>
+          <Navbar
+            addCourse={this.addCourse}
+            addAll={this.addAll}/>
           <CourseTable
             deleteCourse={this.deleteCourse}
             updateCourse={this.updateCourse}
             courses={this.state.courses}/>
         </Route>
-        <Route path="/courses/grid">
+        <Route path="/courses/grid"
+               exact={true}>
+          <Navbar
+            addCourse={this.addCourse}
+            addAll={this.addAll}/>
           <CourseGrid
             deleteCourse={this.deleteCourse}
             updateCourse={this.updateCourse}
@@ -114,15 +118,14 @@ export default class CourseManager extends React.Component {
         </Route>
         <Route
           path={[
-            '/courses/editor/',
-            '/courses/editor/:courseId',
-            '/courses/editor/:courseId/:moduleId',
-            '/courses/editor/:courseId/:moduleId/:lessonId',
-            '/courses/editor/:courseId/:moduleId/:lessonId/:topicId',
+            '/courses/:layout/edit/:courseId/',
+            '/courses/:layout/edit/:courseId/modules/:moduleId/',
+            '/courses/:layout/edit/:courseId/modules/:moduleId/lessons/:lessonId',
+            '/courses/:layout/edit/:courseId/modules/:moduleId/lessons/:lessonId/topics/:topicId',
           ]}
           exact={true}
-          render={(props) =>
-            <CourseEditor {...props}/>}>
+          render={() =>
+            <CourseEditor/>}>
         </Route>
       </div>
     );

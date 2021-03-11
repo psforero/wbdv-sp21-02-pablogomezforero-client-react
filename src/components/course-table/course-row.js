@@ -27,7 +27,8 @@ const CourseRow = (
     <tr className="row">
       <td className="col-4">
         {
-          !editing && <Link to={`/courses/editor/${course._id}`}>
+          // !editing && <Link to={`/courses/editor/${course._id}`}>
+          !editing && <Link to={`/courses/table/edit/${course._id}`}>
             {title}
           </Link>
         }

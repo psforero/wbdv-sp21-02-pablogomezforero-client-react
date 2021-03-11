@@ -13,12 +13,12 @@ const TopicPills = (
     findTopicsForLesson
   }
 ) => {
-  const { courseId, moduleId, lessonId, topicId } = useParams();
-  const [lessonSelected, setLessonSelected] = useState(lessonId !== 'undefined' && typeof lessonId !== 'undefined');
+  const { layout, courseId, moduleId, lessonId, topicId } = useParams();
+  const [lessonSelected, setLessonSelected] = useState(false);
   useEffect(() => {
-    setLessonSelected(lessonId !== 'undefined' && typeof lessonId !== 'undefined');
     findTopicsForLesson(lessonId);
-  }, [lessonId, topicId]);
+    setLessonSelected(lessonId !== 'undefined' && typeof lessonId !== 'undefined');
+  }, [lessonId]);
   return (
     <>
       {
@@ -27,7 +27,7 @@ const TopicPills = (
           {
             topics.map(topic =>
               <Link className={`nav-link ${topic._id === topicId ? 'active' : ''}`}
-                    to={`/courses/editor/${courseId}/${moduleId}/${lessonId}/${topic._id}`}>
+                    to={`/courses/${layout}/edit/${courseId}/modules/${moduleId}/lessons/${lessonId}/topics/${topic._id}`}>
                 <EditableItem
                   item={topic}
                   deleteItem={deleteTopic}
@@ -40,7 +40,7 @@ const TopicPills = (
              onClick={() => createTopic(lessonId)}>
             {
               topics.length <= 0 &&
-              <p>No topics available. Click here to create a new topic</p>
+              <p>This lesson has no topics. Click here to create a new topic</p>
             }
             <i className="fas fa-plus fa-lg"/>
           </a>

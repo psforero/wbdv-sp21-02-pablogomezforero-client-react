@@ -13,7 +13,7 @@ const ModuleList = (
     findModulesForCourse
   }
 ) => {
-  const { courseId, moduleId } = useParams();
+  const { layout, courseId, moduleId } = useParams();
   useEffect(() => {
     if (courseId !== 'undefined' && typeof courseId !== 'undefined') {
       findModulesForCourse(courseId);
@@ -27,7 +27,7 @@ const ModuleList = (
           modules.map((module) =>
             <Link
               className={`list-group-item list-group-item-action ${module._id === moduleId ? 'active' : ''}`}
-              to={`/courses/editor/${courseId}/${module._id}`}>
+              to={`/courses/${layout}/edit/${courseId}/modules/${module._id}`}>
               <EditableItem
                 item={module}
                 deleteItem={deleteModule}

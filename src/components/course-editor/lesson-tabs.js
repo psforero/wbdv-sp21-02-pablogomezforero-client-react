@@ -13,7 +13,7 @@ const LessonTabs = (
     findLessonsForModule
   }
 ) => {
-  const { courseId, moduleId , lessonId} = useParams();
+  const { layout, courseId, moduleId, lessonId } = useParams();
   const [moduleSelected, setModuleSelected] = useState(moduleId !== 'undefined' && typeof moduleId !== 'undefined');
   useEffect(() => {
     setModuleSelected(moduleId !== 'undefined' && typeof moduleId !== 'undefined');
@@ -30,7 +30,7 @@ const LessonTabs = (
             lessons.map((lesson) =>
               <Link
                 className={`nav-link ${lesson._id === lessonId ? 'active' : ''}`}
-                to={`/courses/editor/${courseId}/${moduleId}/${lesson._id}`}>
+                to={`/courses/${layout}/edit/${courseId}/modules/${moduleId}/lessons/${lesson._id}`}>
                 <EditableItem
                   item={lesson}
                   deleteItem={deleteLesson}
@@ -43,7 +43,7 @@ const LessonTabs = (
              onClick={() => createLesson(moduleId)}>
             {
               lessons.length <= 0 &&
-              <p>No lessons available. Click here to create a new lesson</p>
+              <p>This module has no lessons. Click here to create a new lesson</p>
             }
             <i className="fas fa-plus fa-lg"/>
           </a>
