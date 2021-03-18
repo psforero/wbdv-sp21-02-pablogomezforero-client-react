@@ -122,6 +122,7 @@ export default class CourseManager extends React.Component {
             '/courses/:layout/edit/:courseId/modules/:moduleId/',
             '/courses/:layout/edit/:courseId/modules/:moduleId/lessons/:lessonId',
             '/courses/:layout/edit/:courseId/modules/:moduleId/lessons/:lessonId/topics/:topicId',
+            '/courses/:layout/edit/:courseId/modules/:moduleId/lessons/:lessonId/topics/:topicId/widget/:widgetId',
           ]}
           exact={true}
           render={() =>

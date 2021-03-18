@@ -8,6 +8,7 @@ import topicReducer from '../../reducers/topic-reducer';
 import ModuleList from './module-list';
 import LessonTabs from './lesson-tabs';
 import TopicPills from './topic-pills';
+import WidgetList from './widgets/widget-list'
 
 const reducer = combineReducers({
   moduleReducer,
@@ -38,6 +39,7 @@ const CourseEditor = () => {
           <LessonTabs/>
           <div>
             <TopicPills/>
+            <WidgetList/>
           </div>
         </div>
       </div>
