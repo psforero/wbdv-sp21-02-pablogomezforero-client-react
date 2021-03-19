@@ -2,61 +2,46 @@ import React, { useState, useEffect } from 'react'
 import HeadingWidget from './heading-widget';
 import ParagraphWidget from './paragraph-widget';
 import { useParams } from 'react-router-dom';
+import widgetService from '../../../services/widget-service';
 
 const WidgetList = () => {
   const { topicId } = useParams();
-  // MOVE STATE MANAGEMENT TO widgets-reducer
   const [widgets, setWidgets] = useState([]);
   const [editWidget, setEditWidget] = useState({});
 
   useEffect(() => {
-    // MOVE SERVICE COMM TO widgets-service
-    fetch(`http://localhost:8080/api/topics/${topicId}/widgets`)
-      .then(response => response.json())
+    widgetService.findWidgetsForTopic(topicId)
       .then(widgets => setWidgets(widgets));
     setEditWidget({})
   }, [topicId]);
 
-  const createWidgetForTopic = () => {
-    fetch(`http://localhost:8080/api/topics/${topicId}/widgets`, {
-      method: 'POST',
-      body: JSON.stringify({ type: 'HEADING', size: 1, text: 'New Widget' }),
-      headers: {
-        'content-type': 'application/json'
-      }
-    })
-      .then(response => response.json())
+  const createWidget = () => {
+    widgetService.createWidget(topicId)
       .then(widgetCreated => {
         setWidgets(widgets => ([...widgets, widgetCreated]));
       })
   }
 
   const deleteWidget = () =>
-    fetch(`http://localhost:8080/api/widgets/${editWidget.id}`, {
-      method: 'DELETE',
-    }).then(response => {
-      setWidgets(widgets => widgets.filter(w => w.id !== editWidget.id));
-      setEditWidget({});
-    });
+    widgetService.deleteWidget(editWidget.id)
+      .then(response => {
+        setWidgets(widgets => widgets.filter(w => w.id !== editWidget.id));
+        setEditWidget({});
+      });
 
 
   const updateWidget = (widget) => {
-    fetch(`http://localhost:8080/api/widgets/${widget.id}`, {
-      method: 'PUT',
-      body: JSON.stringify(widget),
-      headers: {
-        'content-type': 'application/json'
-      }
-    }).then(response => {
-      setWidgets(widgets => widgets.map(w => w.id !== widget.id ? w : widget));
-      setEditWidget({});
-    })
+    widgetService.updateWidget(widget)
+      .then(response => {
+        setWidgets(widgets => widgets.map(w => w.id !== widget.id ? w : widget));
+        setEditWidget({});
+      })
   }
 
   return (
     <div>
       <i className="fas fa-plus fa-2x float-right"
-         onClick={createWidgetForTopic}/>
+         onClick={createWidget}/>
       <h3>Widget List {widgets.length} {editWidget.id}</h3>
       <ul className="list-group">
         {
