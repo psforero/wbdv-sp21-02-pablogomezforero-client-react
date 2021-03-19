@@ -40,9 +40,17 @@ const WidgetList = () => {
     });
 
 
-  const updateWidget = () => {
-    alert(`Update Widget ${editWidget.id}`);
-    setEditWidget({})
+  const updateWidget = (widget) => {
+    fetch(`http://localhost:8080/api/widgets/${widget.id}`, {
+      method: 'PUT',
+      body: JSON.stringify(widget),
+      headers: {
+        'content-type': 'application/json'
+      }
+    }).then(response => {
+      setWidgets(widgets => widgets.map(w => w.id !== widget.id ? w : widget));
+      setEditWidget({});
+    })
   }
 
   return (
@@ -58,7 +66,7 @@ const WidgetList = () => {
                 editWidget.id === widget.id &&
                 <>
                   <i className="fas fa-fw fa-check float-right"
-                     onClick={() => updateWidget()}/>
+                     onClick={() => updateWidget(widget)}/>
                   <i className="fas fa-fw fa-trash float-right"
                      onClick={() => deleteWidget()}/>
                 </>
@@ -69,10 +77,16 @@ const WidgetList = () => {
                    onClick={() => setEditWidget(widget)}/>
               }
               {
-                widget.type === 'HEADING' && <HeadingWidget widget={widget}/>
+                widget.type === 'HEADING' &&
+                <HeadingWidget
+                  widget={widget}
+                  editing={widget.id === editWidget.id}/>
               }
               {
-                widget.type === 'PARAGRAPH' && <ParagraphWidget widget={widget}/>
+                widget.type === 'PARAGRAPH' &&
+                <ParagraphWidget
+                  widget={widget}
+                  editing={widget.id === editWidget.id}/>
               }
             </li>
           )
