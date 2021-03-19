@@ -30,14 +30,16 @@ const EditableItem = (
               setCachedItem({ ...cachedItem, title: e.target.value })}
             value={cachedItem.title}
           />
-          <i className="fas fa-fw fa-check float-right" onClick={() => {
-            setEditing(false);
-            updateItem(cachedItem);
-          }}/>
-          <i className="fas fa-fw fa-trash float-right" onClick={() => {
-            setEditing(false);
-            deleteItem(item)
-          }}/>
+          <i className="fas fa-fw fa-check float-right"
+             onClick={() => {
+               setEditing(false);
+               updateItem(cachedItem);
+             }}/>
+          <i className="fas fa-fw fa-trash float-right"
+             onClick={() => {
+               setEditing(false);
+               deleteItem(item)
+             }}/>
         </>
       }
     </>
