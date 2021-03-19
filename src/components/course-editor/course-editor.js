@@ -5,16 +5,20 @@ import { combineReducers, createStore } from 'redux';
 import moduleReducer from '../../reducers/module-reducer';
 import lessonReducer from '../../reducers/lesson-reducer';
 import topicReducer from '../../reducers/topic-reducer';
+import widgetReducer from '../../reducers/widget-reducer';
 import ModuleList from './module-list';
 import LessonTabs from './lesson-tabs';
 import TopicPills from './topic-pills';
 import WidgetList from './widgets/widget-list'
 
-const reducer = combineReducers({
-  moduleReducer,
-  lessonReducer,
-  topicReducer
-})
+const reducer = combineReducers(
+  {
+    moduleReducer,
+    lessonReducer,
+    topicReducer,
+    widgetReducer
+  }
+)
 
 const store = createStore(reducer);
 
