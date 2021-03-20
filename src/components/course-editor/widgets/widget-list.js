@@ -21,6 +21,10 @@ const WidgetList = (
     setEditWidget({})
   }, [findWidgetsForTopic, topicId]);
 
+  const updateHandler = (widget, updatedWidget) => {
+    widget = updatedWidget;
+  }
+
   return (
     <div>
       <i className="fas fa-plus fa-2x float-right"
@@ -34,7 +38,7 @@ const WidgetList = (
                 editWidget.id === widget.id &&
                 <>
                   <i className="fas fa-fw fa-check float-right"
-                      onClick={() => updateWidget(widget, setEditWidget)}
+                     onClick={() => updateWidget(widget, setEditWidget)}
                   />
                   <i className="fas fa-fw fa-trash float-right"
                      onClick={() => deleteWidget(widget, setEditWidget)}/>
@@ -49,7 +53,8 @@ const WidgetList = (
                 widget.type === 'HEADING' &&
                 <HeadingWidget
                   widget={widget}
-                  editing={widget.id === editWidget.id}/>
+                  editing={widget.id === editWidget.id}
+                  updateHandler={updateHandler}/>
               }
               {
                 widget.type === 'PARAGRAPH' &&
