@@ -21,10 +21,6 @@ const WidgetList = (
     setEditWidget({})
   }, [findWidgetsForTopic, topicId]);
 
-  const updateHandler = (widget, updatedWidget) => {
-    widget = updatedWidget;
-  }
-
   return (
     <div>
       <i className="fas fa-plus fa-2x float-right"
@@ -35,16 +31,6 @@ const WidgetList = (
           widgets.map((widget, index) =>
             <li className="list-group-item">
               {
-                editWidget.id === widget.id &&
-                <>
-                  <i className="fas fa-fw fa-check float-right"
-                     onClick={() => updateWidget(widget, setEditWidget)}
-                  />
-                  <i className="fas fa-fw fa-trash float-right"
-                     onClick={() => deleteWidget(widget, setEditWidget)}/>
-                </>
-              }
-              {
                 editWidget.id !== widget.id &&
                 <i className="fas fa-cog fa-lg float-right"
                    onClick={() => setEditWidget(widget)}/>
@@ -54,13 +40,18 @@ const WidgetList = (
                 <HeadingWidget
                   widget={widget}
                   editing={widget.id === editWidget.id}
-                  updateHandler={updateHandler}/>
+                  updateWidget={updateWidget}
+                  deleteWidget={deleteWidget}
+                  setEditWidget={setEditWidget}/>
               }
               {
                 widget.type === 'PARAGRAPH' &&
                 <ParagraphWidget
                   widget={widget}
-                  editing={widget.id === editWidget.id}/>
+                  editing={widget.id === editWidget.id}
+                  updateWidget={updateWidget}
+                  deleteWidget={deleteWidget}
+                  setEditWidget={setEditWidget}/>
               }
             </li>
           )
@@ -97,6 +88,7 @@ const dtpm = (dispatch) => {
         .then(response => dispatch({
           type: 'DELETE_WIDGET',
           widget
+
         }));
       setEditWidget({});
     },

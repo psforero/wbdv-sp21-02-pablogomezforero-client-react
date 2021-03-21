@@ -1,15 +1,14 @@
 import React, { useEffect, useState } from 'react'
-import WidgetSelection from './widget-selection';
 
-const HeadingWidget = ({ widget, editing, updateHandler }) => {
-  const [editWidget, setEditWidget] = useState(widget);
+const HeadingWidget = ({ widget, editing, updateWidget, deleteWidget, setEditWidget }) => {
+  const [cachedWidget, setCachedWidget] = useState(widget);
+
   useEffect(() => {
-    setEditWidget(widget)
+    setCachedWidget(widget)
   }, [widget]);
 
   return (
     <>
-      <h2>{widget.text}</h2>
       {
         !editing &&
         <>
@@ -23,35 +22,55 @@ const HeadingWidget = ({ widget, editing, updateHandler }) => {
       }
       {
         editing &&
-        <form className="col-11">
-          <div className="mb-3">
-            <WidgetSelection widget={widget}/>
-          </div>
-          <div className="mb-3">
-            <input className="form-control"
-                   value={editWidget.text}
-                   type="text"
-                   onChange={(e) => {
-                     setEditWidget({ ...editWidget, text: e.target.value })
-                     updateHandler(editWidget);
-                   }}
-            />
-          </div>
-          <div className="mb-3">
-            <select className="form-control"
-                    value={widget.size}>
-              <option value={1}>Heading 1</option>
-              <option value={2}>Heading 2</option>
-              <option value={3}>Heading 3</option>
-              <option value={4}>Heading 4</option>
-              <option value={5}>Heading 5</option>
-              <option value={6}>Heading 6</option>
-            </select>
-          </div>
-        </form>
+        <>
+          <i className="fas fa-fw fa-check float-right"
+             onClick={() => updateWidget(cachedWidget, setEditWidget)}
+          />
+          <i className="fas fa-fw fa-trash float-right"
+             onClick={() => deleteWidget(widget, setEditWidget)}/>
+
+          <form className="col-11">
+            <div className="mb-3">
+              <select className="form-control"
+                      value={cachedWidget.type}
+                      onChange={(e) =>
+                        setCachedWidget({ ...cachedWidget, type: e.target.value })}>
+                <option value='HEADING'>Heading</option>
+                <option value='PARAGRAPH'>Paragraph</option>
+                <option value='VIDEO' disabled>Video</option>
+                <option value='IMAGE' disabled>Image</option>
+                <option value='LINK' disabled>Link</option>
+                <option value='LIST' disabled>List</option>
+                <option value='HTML' disabled>HTML</option>
+              </select>
+            </div>
+            <div className="mb-3">
+              <input className="form-control"
+                     value={cachedWidget.text}
+                     type="text"
+                     onChange={(e) =>
+                       setCachedWidget({ ...cachedWidget, text: e.target.value })
+                     }
+              />
+            </div>
+            <div className="mb-3">
+              <select className="form-control"
+                      value={cachedWidget.size}
+                      onChange={(e) =>
+                        setCachedWidget({ ...cachedWidget, size: e.target.value })}>
+                <option value={1}>Heading 1</option>
+                <option value={2}>Heading 2</option>
+                <option value={3}>Heading 3</option>
+                <option value={4}>Heading 4</option>
+                <option value={5}>Heading 5</option>
+                <option value={6}>Heading 6</option>
+              </select>
+            </div>
+          </form>
+        </>
       }
     </>
   );
-};
+}
 
 export default HeadingWidget;
