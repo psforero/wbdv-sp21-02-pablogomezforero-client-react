@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
-import HeadingWidget from './heading-widget';
-import ParagraphWidget from './paragraph-widget';
 import { useParams } from 'react-router-dom';
 import widgetService from '../../../services/widget-service';
+import WidgetItem from './widget-item';
 
 const WidgetList = (
   {
@@ -25,7 +24,7 @@ const WidgetList = (
     <div>
       <i className="fas fa-plus fa-2x float-right"
          onClick={() => createWidget(topicId)}/>
-      <h3>Widget List {widgets.length} {editWidget.id}</h3>
+      <h3>Widget List {widgets.length}</h3>
       <ul className="list-group">
         {
           widgets.map((widget, index) =>
@@ -35,24 +34,11 @@ const WidgetList = (
                 <i className="fas fa-cog fa-lg float-right"
                    onClick={() => setEditWidget(widget)}/>
               }
-              {
-                widget.type === 'HEADING' &&
-                <HeadingWidget
-                  widget={widget}
-                  editing={widget.id === editWidget.id}
-                  updateWidget={updateWidget}
-                  deleteWidget={deleteWidget}
-                  setEditWidget={setEditWidget}/>
-              }
-              {
-                widget.type === 'PARAGRAPH' &&
-                <ParagraphWidget
-                  widget={widget}
-                  editing={widget.id === editWidget.id}
-                  updateWidget={updateWidget}
-                  deleteWidget={deleteWidget}
-                  setEditWidget={setEditWidget}/>
-              }
+              <WidgetItem widget={widget}
+                          editing={widget.id === editWidget.id}
+                          updateWidget={updateWidget}
+                          deleteWidget={deleteWidget}
+                          setEditWidget={setEditWidget}/>
             </li>
           )
         }
