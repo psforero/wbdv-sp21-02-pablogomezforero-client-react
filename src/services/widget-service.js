@@ -1,13 +1,16 @@
+const WIDGET_URL = process.env.REACT_APP_WIDGET_URL;
+const TOPIC_URL = process.env.REACT_APP_TOPIC_URL;
+
 export const findAllWidgets = () =>
-  fetch('http://localhost:8080/api/widgets')
+  fetch(`${WIDGET_URL}`)
     .then(response => response.json());
 
 export const findWidgetsForTopic = (topicId) =>
-  fetch(`http://localhost:8080/api/topics/${topicId}/widgets`)
+  fetch(`${TOPIC_URL}/${topicId}/widgets`)
     .then(response => response.json());
 
 export const createWidget = (topicId) =>
-  fetch(`http://localhost:8080/api/topics/${topicId}/widgets`, {
+  fetch(`${TOPIC_URL}/${topicId}/widgets`, {
     method: 'POST',
     body: JSON.stringify({ type: 'HEADING', size: 1, text: 'New Widget' }),
     headers: {
@@ -17,12 +20,12 @@ export const createWidget = (topicId) =>
     .then(response => response.json());
 
 export const deleteWidget = (widgetId) =>
-  fetch(`http://localhost:8080/api/widgets/${widgetId}`, {
+  fetch(`${WIDGET_URL}/${widgetId}`, {
     method: 'DELETE',
   });
 
 export const updateWidget = (widget) =>
-  fetch(`http://localhost:8080/api/widgets/${widget.id}`, {
+  fetch(`${WIDGET_URL}/${widget.id}`, {
     method: 'PUT',
     body: JSON.stringify(widget),
     headers: {
