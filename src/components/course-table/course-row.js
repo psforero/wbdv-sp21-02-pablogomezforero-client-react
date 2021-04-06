@@ -1,5 +1,5 @@
-import React, {useState} from "react";
-import {Link} from "react-router-dom";
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 
 const CourseRow = (
@@ -40,7 +40,12 @@ const CourseRow = (
         }
       </td>
       <td className="col-3 wd-owned-by-col">{owner}</td>
-      <td className="col-3 wd-last-mod-col">{lastModified}</td>
+      <td className="col-2 wd-last-mod-col">{lastModified}</td>
+      <td>
+        <Link to={`/courses/${course._id}/quizzes`}>
+          Quizzes
+        </Link>
+      </td>
       <td className="col-2">
         <div className="float-right">
           {!editing && <i className="fas fa-fw fa-edit" onClick={() => setEditing(true)}/>}
