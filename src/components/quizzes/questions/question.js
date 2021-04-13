@@ -1,26 +1,80 @@
-import React from 'react'
+import React, { useState } from 'react'
+import MultipleChoiceQuestion from './multiple-choice-question';
+import TrueFalseQuestion from './true-false-question';
 
-const Question = ({ question }) => {
+import './questions.css';
+
+const Question = ({ question, index }) => {
+  const [selected, setSelected] = useState('');
+  const [graded, setGraded] = useState(false);
+  const [questionIsCorrect, setQuestionIsCorrect] = useState(false);
+
+  const handleGrade = () => {
+    if (selected === '') {
+      alert('Can\'t leave questions blank. Please select an option');
+    } else {
+      setQuestionIsCorrect(question.correct === selected);
+      setGraded(true);
+    }
+  }
+
   return (
     <>
-      <h4>{question.title}</h4>
-      <h5>{question.question}</h5>
+      <h5>
+        Q{index + 1}) {question.question}
+        {
+          graded && questionIsCorrect &&
+          <i className="fas fa-lg fa-check"/>
+        }
+        {
+          graded && !questionIsCorrect &&
+          <i className="fas fa-lg fa-times"/>
+        }
+      </h5>
       {
         question.type === 'TRUE_FALSE' &&
-        <p>TRUE FALSE</p>
+        <TrueFalseQuestion question={question}
+                           graded={graded}
+                           questionIsCorrect={questionIsCorrect}
+                           setSelected={setSelected}
+                           selected={selected}/>
       }
       {
         question.type === 'MULTIPLE_CHOICE' &&
-        <p>MULTIPLE CHOICE</p>
+        <MultipleChoiceQuestion question={question}
+                                graded={graded}
+                                questionIsCorrect={questionIsCorrect}
+                                setSelected={setSelected}
+                                selected={selected}/>
       }
+      <br/>
+      <div className="row">
+        <div className="col-4">
+          <button className="btn btn-success" onClick={() => handleGrade()} disabled={graded}>
+            Grade
+          </button>
+          <button className="btn btn-light" onClick={() => {
+            setGraded(false);
+            setSelected('');
+          }} disabled={!graded}>
+            Reset
+          </button>
+        </div>
+        <div className="col-4">
+          <p>Your answer: {selected}</p>
+        </div>
+        <div className="col-4">
+          {
+            graded &&
+            <p>Correct: {question.correct}</p>
+          }
+        </div>
+      </div>
+
+      <hr/>
+      <hr/>
     </>
   );
-}
+};
 
 export default Question;
-// {/*"_id": "345",*/}
-// {/*"title": "JSON True False",*/}
-// {/*"quizId": "234",*/}
-// {/*"question": "JSON stands for Java Object Notation",*/}
-// {/*"correct": "false",*/}
-// {/*"type": "TRUE_FALSE"*/}
