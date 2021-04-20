@@ -1,22 +1,19 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import MultipleChoiceQuestion from './multiple-choice-question';
 import TrueFalseQuestion from './true-false-question';
 
 import './questions.css';
 
-const Question = ({ question, index }) => {
+const Question = ({ question, index, graded }) => {
   const [selected, setSelected] = useState('');
-  const [graded, setGraded] = useState(false);
   const [questionIsCorrect, setQuestionIsCorrect] = useState(false);
 
-  const handleGrade = () => {
-    if (selected === '') {
-      alert('Can\'t leave questions blank. Please select an option');
-    } else {
-      setQuestionIsCorrect(question.correct === selected);
-      setGraded(true);
+  useEffect( () => {
+    if (!graded) {
+      question['answer'] = selected;
+      setQuestionIsCorrect(question['answer'] === questionIsCorrect);
     }
-  }
+  }, [question, selected, graded, questionIsCorrect])
 
   return (
     <>
@@ -50,17 +47,6 @@ const Question = ({ question, index }) => {
       <br/>
       <div className="row">
         <div className="col-4">
-          <button className="btn btn-success" onClick={() => handleGrade()} disabled={graded}>
-            Grade
-          </button>
-          <button className="btn btn-light" onClick={() => {
-            setGraded(false);
-            setSelected('');
-          }} disabled={!graded}>
-            Reset
-          </button>
-        </div>
-        <div className="col-4">
           <p>Your answer: {selected}</p>
         </div>
         <div className="col-4">
@@ -70,8 +56,6 @@ const Question = ({ question, index }) => {
           }
         </div>
       </div>
-
-      <hr/>
       <hr/>
     </>
   );
